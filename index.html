@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator</title>
+    <!-- mock up code by Dr.F 12.26.22-->
+
+    <style>
+        body {
+            background-color: purple;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 5%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgray;
+        }
+        img {
+            margin-top: 10px;
+            width: 200px;
+            height: 200px;
+        }
+        h2 {
+            margin: 0 0 10%;
+            color: black;
+        }
+        h3 {
+            margin: 0;
+            padding: 50px 0 10PX;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>UI QR Code Basic Generator</h2>
+        <!-- The input field where the user can enter the text or URL to encode in the QR code -->
+        <input type="text" id="qr-code-value" placeholder="Enter text or URL">
+
+        <!-- The button that will trigger the QR code generation -->
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <!-- The img element where the QR code image will be displayed -->
+
+        <h3>Preview</h3>
+        <img id="qr-code-image" alt="QR code">
+    </div>
+    
+    <!-- Include the QRious library -->
+    <!--<script src="qrious.min.js" or download></script>-->
+    <!--or use the rest-api to call the qrious library -->
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+    <script>
+        function generateQRCode() {
+            // Get the value entered by the user
+            const value = document.getElementById('qr-code-value').value;
+            
+            // Set the options for the QR code in dictionary format
+            const options = {
+                value: value, // The text or URL to encode in the QR code
+                size: 400, // The size of the QR code in pixels
+                level: 'H' // The error correction level of the QR code
+            };
+
+            // Create a new QR code object
+            const qrCode = new QRious(options);
+
+            // Get the QR code image as a data URL
+            const qrCodeImage = qrCode.toDataURL();
+
+            // Display the QR code image on the webpage
+            // you can assign your default image here
+            document.getElementById('qr-code-image').src = qrCodeImage;
+
+        }
+    </script>
+</body>
+</html>
